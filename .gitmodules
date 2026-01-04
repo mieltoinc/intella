@@ -1,0 +1,3 @@
+[submodule "apps/intella-app"]
+	path = apps/intella-app
+	url = git@github.com:mieltoinc/intella-137eeaa8.git
