@@ -1,13 +1,20 @@
 {
   "name": "intella",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "AI assistant to search and act across applications for your entire workforce",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "pnpm --filter intella-app dev",
+    "build": "pnpm --filter intella-app build",
+    "start": "pnpm --filter intella-app build:dev",
+    "lint": "pnpm --filter intella-app lint"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["ai", "assistant", "workforce"],
+  "author": "hi@mielto.com",
   "license": "ISC",
   "packageManager": "pnpm@10.15.1"
 }
