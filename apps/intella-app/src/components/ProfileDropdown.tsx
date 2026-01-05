@@ -16,14 +16,27 @@ import {
   Sparkles,
   ChevronRight
 } from "lucide-react";
+import { User as SupabaseUser } from "@supabase/supabase-js";
 
-const ProfileDropdown = () => {
+import { getProfileFromUser } from "@/integrations/supabase/helper";
+import { useAuth } from "@/contexts/AuthContext";
+
+const ProfileDropdown = ({ user }: { user: SupabaseUser }) => {
+
+  if (!user) {
+    return null;
+  }
+
+  const profile = getProfileFromUser(user);
+
+  const { signOut } = useAuth();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="relative">
           <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan to-cyan-dim flex items-center justify-center ring-2 ring-background">
-            <span className="text-sm font-medium text-primary-foreground">JD</span>
+            <span className="text-sm font-medium text-primary-foreground">{profile.shortName.toUpperCase()}</span>
           </div>
           <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-background" />
         </button>
@@ -36,11 +49,11 @@ const ProfileDropdown = () => {
         {/* User Info */}
         <div className="flex items-center gap-3 mb-4">
           <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan to-cyan-dim flex items-center justify-center">
-            <span className="text-lg font-medium text-primary-foreground">JD</span>
+            <span className="text-lg font-medium text-primary-foreground">{profile.shortName}</span>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="font-semibold text-foreground">John Doe</p>
-            <p className="text-sm text-muted-foreground truncate">john.doe@example.com</p>
+            <p className="font-semibold text-foreground">{profile.name}</p>
+            <p className="text-sm text-muted-foreground truncate">{profile.email}</p>
           </div>
         </div>
 
@@ -104,7 +117,7 @@ const ProfileDropdown = () => {
 
           <DropdownMenuSeparator className="bg-border" />
 
-          <DropdownMenuItem className="flex items-center gap-3 px-2 py-2.5 cursor-pointer text-red-400 focus:text-red-400">
+          <DropdownMenuItem className="flex items-center gap-3 px-2 py-2.5 cursor-pointer text-red-400 focus:text-red-400" onClick={() => signOut()}>
             <LogOut className="w-5 h-5" />
             <span>Sign out</span>
           </DropdownMenuItem>

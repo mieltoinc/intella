@@ -108,6 +108,9 @@ const Auth = () => {
           password,
           options: {
             emailRedirectTo: redirectUrl,
+            data: {
+              plan: 'free',
+            }
           },
         });
 
@@ -235,6 +238,7 @@ const Auth = () => {
             type="button"
             variant="outline"
             className="w-full mt-3"
+            disabled={true}
             onClick={() => {
               toast({
                 title: "Mielto sign-in",
