@@ -1,0 +1,160 @@
+@import "@fontsource/playfair-display/400.css";
+@import "@fontsource/playfair-display/500.css";
+@import "@fontsource/playfair-display/600.css";
+@import "@fontsource/playfair-display/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 10%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 13%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 13%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 174 72% 56%;
+    --primary-foreground: 0 0% 5%;
+
+    --secondary: 0 0% 16%;
+    --secondary-foreground: 0 0% 75%;
+
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 55%;
+
+    --accent: 174 72% 56%;
+    --accent-foreground: 0 0% 5%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 18%;
+    --ring: 174 72% 56%;
+
+    --radius: 0.75rem;
+
+    /* Custom Intella tokens */
+    --surface: 0 0% 15%;
+    --surface-elevated: 0 0% 18%;
+    --surface-hover: 0 0% 22%;
+    --text-primary: 0 0% 95%;
+    --text-secondary: 0 0% 65%;
+    --text-muted: 0 0% 45%;
+    --accent-cyan: 174 72% 56%;
+    --accent-cyan-dim: 174 50% 35%;
+    --gradient-glow: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(174 72% 56% / 0.15), transparent);
+
+    --sidebar-background: 0 0% 11%;
+    --sidebar-foreground: 0 0% 70%;
+    --sidebar-primary: 174 72% 56%;
+    --sidebar-primary-foreground: 0 0% 5%;
+    --sidebar-accent: 0 0% 18%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 174 72% 56%;
+
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+  }
+
+  .dark {
+    --background: 0 0% 10%;
+    --foreground: 0 0% 95%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: var(--font-body);
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50 rounded-xl;
+  }
+
+  .input-glow {
+    box-shadow: 0 0 0 1px hsl(var(--border)),
+                0 0 40px -10px hsl(var(--accent-cyan) / 0.1),
+                inset 0 1px 0 hsl(0 0% 100% / 0.02);
+  }
+
+  .input-glow:focus-within {
+    box-shadow: 0 0 0 1px hsl(var(--accent-cyan) / 0.5),
+                0 0 60px -10px hsl(var(--accent-cyan) / 0.2),
+                inset 0 1px 0 hsl(0 0% 100% / 0.05);
+  }
+
+  .action-pill {
+    @apply flex items-center gap-2 px-4 py-2.5 rounded-full bg-secondary/50 text-secondary-foreground 
+           border border-border/50 transition-all duration-200 hover:bg-secondary hover:border-border;
+  }
+
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-sidebar-foreground 
+           transition-all duration-150 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+  }
+
+  .nav-item-active {
+    @apply bg-sidebar-accent text-sidebar-accent-foreground;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent;
+  }
+
+  .glow-effect {
+    filter: drop-shadow(0 0 20px hsl(var(--accent-cyan) / 0.3));
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}

@@ -100,4 +100,4 @@ temp/
 
 /apps/intella-app/.git
 
-/intella-app
+/intella-app/.env
