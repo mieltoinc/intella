@@ -101,7 +101,9 @@ const Auth = () => {
           }
         }
       } else {
-        const redirectUrl = `${window.location.origin}/`;
+        const baseUrl = import.meta.env.VITE_PUBLIC_APP_URL ?? `${window.location.origin}/`;
+
+        const redirectUrl = `${baseUrl}/auth/callback`;
 
         const { error } = await supabase.auth.signUp({
           email: email.trim(),
